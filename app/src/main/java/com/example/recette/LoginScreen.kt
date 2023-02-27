@@ -21,6 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.recette.ui.main.MainActivity
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 
 /*
@@ -108,15 +110,15 @@ fun LoginScreen(
                 onClick = {
                     //navController.navigate(route = Screen.Search.route)
                     auth.signInWithEmailAndPassword(emailField.value, passwordField.value)
-                        .addOnCompleteListener(this) { task ->
+                        .addOnCompleteListener() { task ->
                             if (task.isSuccessful)
                             {
                                 Log.d(TAG, "signInWithEmail:success")
                                 val user = auth.currentUser
                                 navController.navigate(route = Screen.Search.route)
                             } else {
-                                Toast.makeText(baseContext, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show()
+                                val activity = MainActivity()
+                                activity.toast_short("Email and Password combination failed")
                             }
                         }
                 },

@@ -1,6 +1,8 @@
 package com.example.recette.ui.main
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.NavHostController
@@ -10,6 +12,7 @@ import com.example.recette.ui.theme.RecetteTheme
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+
 
 class MainActivity : ComponentActivity() {
 
@@ -26,4 +29,8 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+    fun toast_short(msg: String?) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
 }
