@@ -116,7 +116,7 @@ fun LoginScreen(
                                 if (task.isSuccessful)
                                 {
                                     Log.d(TAG, "signInWithEmail:success")
-                                    val user = auth.currentUser
+                                    //val user = auth.currentUser
                                     navController.navigate(route = Screen.Search.route)
                                 } else {
                                     Log.d(TAG, "signInWithEmail:failure")
@@ -138,6 +138,15 @@ fun LoginScreen(
                 )
                 Spacer(Modifier.size(ButtonDefaults.IconSpacing))
             }
+            Text(
+                modifier = Modifier.clickable {
+                    navController.navigate(route = Screen.Register.route)
+                },
+                text = "Click here to register",
+                color = MaterialTheme.colors.primary,
+                fontSize = MaterialTheme.typography.h5.fontSize,
+                fontWeight = FontWeight.Bold
+            )
         }
     }
 }
