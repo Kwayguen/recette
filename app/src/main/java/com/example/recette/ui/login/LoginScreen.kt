@@ -147,6 +147,9 @@ fun LoginScreen(
                 fontSize = MaterialTheme.typography.h5.fontSize,
                 fontWeight = FontWeight.Bold
             )
+            Button(onClick = { navController.navigate(route = Screen.Search.route) }) {
+                Text(text = "Cheat button to navigate to next screen")
+            }
         }
     }
 }
