@@ -1,8 +1,8 @@
 package com.example.recette
 
 import android.content.ContentValues.TAG
-import android.nfc.Tag
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,8 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 
+/*
 var email = "";
 var password = "";
+*/
 
 @Composable
 fun LoginScreen(
@@ -44,14 +46,90 @@ fun LoginScreen(
         ) {
             Title("ReCeTTe")
             LoginText(navController = navController)
-            EmailField()
-            PasswordField()
-            LoginButton(
+            /*EmailField()*/
+            var emailField = remember { mutableStateOf("") }
+            OutlinedTextField(
+                modifier = Modifier.padding(8.dp),
+                value = emailField.value,
+                onValueChange = {
+                    emailField.value = it
+                },
+                label = {
+                    Text(text = "Email")
+                },
+                singleLine = true,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Email,
+                        contentDescription = "Email Icon"
+                    )
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+
+                    )
+            )
+            //PasswordField()
+            var passwordField = remember { mutableStateOf("") }
+            OutlinedTextField(
+                modifier = Modifier.padding(8.dp),
+                value = passwordField.value,
+                onValueChange = {
+                    passwordField.value = it
+                },
+                label = {
+                    Text(text = "Password")
+                },
+                singleLine = true,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Lock,
+                        contentDescription = "Password Icon"
+                    )
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password
+                ),
+                trailingIcon = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Filled.Star,
+                            contentDescription = "Visibility Icon")
+                    }
+                },
+            )
+            /*LoginButton(
                 navController = navController,
                 auth = auth,
                 email = email,
                 password = password
-            )
+            )*/
+            Button(
+                onClick = {
+                    //navController.navigate(route = Screen.Search.route)
+                    auth.signInWithEmailAndPassword(emailField.value, passwordField.value)
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful)
+                            {
+                                Log.d(TAG, "signInWithEmail:success")
+                                val user = auth.currentUser
+                                navController.navigate(route = Screen.Search.route)
+                            } else {
+                                Toast.makeText(baseContext, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                },
+                modifier = Modifier.padding(8.dp),
+            ) {
+                Text("Login ")
+                Icon(
+                    Icons.Filled.Done,
+                    contentDescription = "Login",
+                    modifier = Modifier.size(ButtonDefaults.IconSize),
+                )
+                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+            }
         }
     }
 }
@@ -101,7 +179,7 @@ fun EmailField() {
         value = emailField.value,
         onValueChange = {
             emailField.value = it
-            email = it
+            //email = it
         },
         label = {
             Text(text = "Email")
