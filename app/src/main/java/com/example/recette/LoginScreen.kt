@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.NavController
 import com.example.recette.ui.main.MainActivity
 import com.google.android.gms.tasks.Task
@@ -109,18 +110,24 @@ fun LoginScreen(
             Button(
                 onClick = {
                     //navController.navigate(route = Screen.Search.route)
-                    auth.signInWithEmailAndPassword(emailField.value, passwordField.value)
-                        .addOnCompleteListener() { task ->
-                            if (task.isSuccessful)
-                            {
-                                Log.d(TAG, "signInWithEmail:success")
-                                val user = auth.currentUser
-                                navController.navigate(route = Screen.Search.route)
-                            } else {
-                                val activity = MainActivity()
-                                activity.toast_short("Email and Password combination failed")
+                    val context = MainActivity.appContext
+                    if(emailField.value != "" && passwordField.value != "")
+                    {
+                        auth.signInWithEmailAndPassword(emailField.value, passwordField.value)
+                            .addOnCompleteListener() { task ->
+                                if (task.isSuccessful)
+                                {
+                                    Log.d(TAG, "signInWithEmail:success")
+                                    val user = auth.currentUser
+                                    navController.navigate(route = Screen.Search.route)
+                                } else {
+                                    Log.d(TAG, "signInWithEmail:failure")
+                                    //activity.toastShort("Email and Password combination failed")
+                                }
                             }
-                        }
+                    } else {
+                        Toast.makeText(context, "Empty fields", Toast.LENGTH_LONG).show()
+                    }
                 },
                 modifier = Modifier.padding(8.dp),
             ) {

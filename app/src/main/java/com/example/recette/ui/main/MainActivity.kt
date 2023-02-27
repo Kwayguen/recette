@@ -29,8 +29,15 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-    fun toast_short(msg: String?) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+
+    companion object {
+
+        lateinit  var appContext: Context
+
+    }
+    fun toastShort(msg: String) {
+        val toast = Toast.makeText(this, msg, Toast.LENGTH_LONG)
+        toast.show()
     }
 
 }
