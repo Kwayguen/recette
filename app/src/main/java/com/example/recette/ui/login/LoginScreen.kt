@@ -1,4 +1,4 @@
-package com.example.recette
+package com.example.recette.ui.login
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -21,8 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.recette.nav.Screen
-import com.example.recette.ui.main.MainActivity
+import com.example.recette.Screen
+import com.example.recette.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 /*
@@ -108,7 +108,7 @@ fun LoginScreen(
             )*/
             Button(
                 onClick = {
-                    val context = MainActivity.appContext
+                    //val context = MainActivity.appContext
                     if(emailField.value != "" && passwordField.value != "")
                     {
                         auth.signInWithEmailAndPassword(emailField.value, passwordField.value)
@@ -120,12 +120,12 @@ fun LoginScreen(
                                     navController.navigate(route = Screen.Search.route)
                                 } else {
                                     Log.d(TAG, "signInWithEmail:failure")
-                                    Toast.makeText(context, "Email and Password combination failed", Toast.LENGTH_LONG).show()
+                                    //Toast.makeText(context, "Email and Password combination failed", Toast.LENGTH_LONG).show()
                                 }
                             }
                     } else {
                         Log.d(TAG, "emptyFields")
-                        Toast.makeText(context, "Empty fields", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(context, "Empty fields", Toast.LENGTH_LONG).show()
                     }
                 },
                 modifier = Modifier.padding(8.dp),

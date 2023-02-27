@@ -1,12 +1,12 @@
-package com.example.recette.nav
+package com.example.recette
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.recette.LoginScreen
-import com.example.recette.RegisterScreen
-import com.example.recette.SearchScreen
+import com.example.recette.ui.login.LoginScreen
+import com.example.recette.ui.register.RegisterScreen
+import com.example.recette.ui.search.SearchScreen
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable

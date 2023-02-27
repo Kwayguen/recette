@@ -1,4 +1,4 @@
-package com.example.recette
+package com.example.recette.ui.register
 
 import androidx.compose.foundation.clickable
 import androidx.compose.runtime.Composable
@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
-import com.example.recette.nav.Screen
+import com.example.recette.Screen
 
 @Composable
 fun RegisterScreen(

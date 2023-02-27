@@ -1,4 +1,4 @@
-package com.example.recette.ui.main
+package com.example.recette
 
 import android.content.Context
 import android.os.Bundle
@@ -7,7 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.recette.nav.SetupNavGraph
+import com.example.recette.SetupNavGraph
 import com.example.recette.ui.theme.RecetteTheme
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -22,6 +22,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = Firebase.auth
+        setContext(this);
         setContent {
             RecetteTheme {
                 navController = rememberNavController()
@@ -33,11 +34,8 @@ class MainActivity : ComponentActivity() {
     companion object {
 
         lateinit  var appContext: Context
-
+        fun setContext(con: Context) {
+            //context = con
+        }
     }
-    fun toastShort(msg: String) {
-        val toast = Toast.makeText(this, msg, Toast.LENGTH_LONG)
-        toast.show()
-    }
-
 }
