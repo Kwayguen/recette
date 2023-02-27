@@ -20,10 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.NavController
+import com.example.recette.nav.Screen
 import com.example.recette.ui.main.MainActivity
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 
 /*
@@ -109,7 +108,6 @@ fun LoginScreen(
             )*/
             Button(
                 onClick = {
-                    //navController.navigate(route = Screen.Search.route)
                     val context = MainActivity.appContext
                     if(emailField.value != "" && passwordField.value != "")
                     {
@@ -122,10 +120,11 @@ fun LoginScreen(
                                     navController.navigate(route = Screen.Search.route)
                                 } else {
                                     Log.d(TAG, "signInWithEmail:failure")
-                                    //activity.toastShort("Email and Password combination failed")
+                                    Toast.makeText(context, "Email and Password combination failed", Toast.LENGTH_LONG).show()
                                 }
                             }
                     } else {
+                        Log.d(TAG, "emptyFields")
                         Toast.makeText(context, "Empty fields", Toast.LENGTH_LONG).show()
                     }
                 },
